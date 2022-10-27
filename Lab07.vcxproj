@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Lab07.cpp" />
+    <ClCompile Include="orbit.cpp" />
     <ClCompile Include="position.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="uiDraw.cpp" />
