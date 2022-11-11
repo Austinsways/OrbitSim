@@ -76,6 +76,7 @@ public:
 		advance_velocityAndGravity();
 		accelerate_movingUpPointingUp();
 		accelerate_movingLeftPointingRight();
+		accelerate_noMovementPointingUpRight();
 	}
 
 private:
