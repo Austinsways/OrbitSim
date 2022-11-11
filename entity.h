@@ -12,14 +12,14 @@ class Entity
 public:
    Entity() {}
    Entity(Position pos, Velocity vel) {}
-   void setPosition(Position pos) {}
-   Position getPosition() const {}
-   void setVelocity(Velocity vel) {}
-   Velocity getVelocity() const {}
-   double getRadius() const {}
+   virtual void setPosition(Position pos) {}
+   virtual Position getPosition() const {}
+   virtual void setVelocity(Velocity vel) {}
+   virtual Velocity getVelocity() const {}
+   virtual double getRadius() const {}
    virtual void advance(const Earth& earth) {}
-   void kill() {}
-   bool isDead() const {}
+   virtual void kill() {}
+   virtual bool isDead() const {}
    virtual std::list<Entity> destroy() {}
    virtual void draw(ogstream& gout) = 0;
 
