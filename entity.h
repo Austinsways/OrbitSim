@@ -17,7 +17,7 @@ public:
    void setVelocity(Velocity vel) {}
    Velocity getVelocity() const {}
    double getRadius() const {}
-   virtual void advance(Earth earth) {}
+   virtual void advance(const Earth& earth) {}
    void kill() {}
    bool isDead() const {}
    virtual std::list<Entity> destroy() {}

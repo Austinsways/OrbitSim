@@ -12,12 +12,12 @@ public:
    virtual Acceleration calculateGravity(Entity entity) {}
    virtual Position getPosition() {}
    virtual double getRadius() {}
-   virtual double getTimeDilation() {}
+   virtual double getTimePerFrame() {}
    virtual void draw(ogstream gout) {}
 
 private:
    Position position;
    double radius;
    double angle;
-   double timeDilation;
+   double timePerFrame;
 };
