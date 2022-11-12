@@ -74,6 +74,8 @@ public:
 		advance_moveForward();
 		advance_noMovementWithGravity();
 		advance_velocityAndGravity();
+		turnLeft();
+		turnRight();
 		accelerate_movingUpPointingUp();
 		accelerate_movingLeftPointingRight();
 		accelerate_noMovementPointingUpRight();
@@ -153,6 +155,48 @@ private:
 		// verify
 		assert(ship.position == Position(0.0, 75.0));
 		assert(ship.velocity == Velocity(0.0, 25.0));
+
+	}  // teardown
+
+	/**************************************************
+	 * TURN LEFT - Ship rotates to the left
+	 **************************************************/
+	void turnLeft()
+	{
+		// setup
+		Ship ship;
+		ship.position = Position(0.0, 0.0);
+		ship.velocity = Velocity(0.0, 100.0);
+		ship.angle = 0.0;
+
+		// exercise
+		ship.turnLeft();
+
+		// verify
+		assert(ship.position == Position(0.0, 0.0));
+		assert(ship.velocity == Velocity(0.0, 100.0));
+		assert(ship.angle == -0.1);
+
+	}  // teardown
+
+	/**************************************************
+	 * TURN RIGHT - Ship rotates to the right
+	 **************************************************/
+	void turnRight()
+	{
+		// setup
+		Ship ship;
+		ship.position = Position(0.0, 0.0);
+		ship.velocity = Velocity(0.0, 100.0);
+		ship.angle = 0.0;
+
+		// exercise
+		ship.turnRight();
+
+		// verify
+		assert(ship.position == Position(0.0, 0.0));
+		assert(ship.velocity == Velocity(0.0, 100.0));
+		assert(ship.angle == 0.1);
 
 	}  // teardown
 
