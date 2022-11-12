@@ -152,10 +152,10 @@
     <ClInclude Include="fragment.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="position.h" />
-    <ClInclude Include="Projectile.h" />
-    <ClInclude Include="Sattelite.h" />
+    <ClInclude Include="projectile.h" />
+    <ClInclude Include="satellite.h" />
     <ClInclude Include="ship.h" />
-    <ClInclude Include="Shortlived.h" />
+    <ClInclude Include="shortLived.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="testGame.h" />
     <ClInclude Include="testShip.h" />

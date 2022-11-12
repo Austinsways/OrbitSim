@@ -7,8 +7,8 @@
 #include "ship.h"
 #include "game.h"
 #include "entity.h"
-#include "Sattelite.h"
-#include "Fragment.h"
+#include "satellite.h"
+#include "fragment.h"
 
 #include <cmath>
 #include <cassert>

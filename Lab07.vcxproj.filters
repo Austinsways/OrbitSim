@@ -71,13 +71,13 @@
     <ClInclude Include="game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sattelite.h">
+    <ClInclude Include="satellite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Shortlived.h">
+    <ClInclude Include="shortLived.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Projectile.h">
+    <ClInclude Include="projectile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="fragment.h">

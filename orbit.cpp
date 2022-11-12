@@ -19,6 +19,13 @@
 #include "uiInteract.h" // for INTERFACE
 #include "uiDraw.h"     // for RANDOM and DRAW*
 #include "position.h"      // for POINT
+
+//#define TEST
+#ifdef DEBUG
+#include "test.h"
+#endif // DEBUG
+
+
 using namespace std;
 
 const double GEO = 42164000.0;
@@ -130,6 +137,12 @@ int WINAPI wWinMain(
 int main(int argc, char** argv)
 #endif // !_WIN32
 {
+#ifdef DEBUG
+   // Run tests in debug mode
+   testRunner();
+#endif // DEBUG
+
+
    // Initialize OpenGL
    Position ptUpperRight;
    ptUpperRight.setZoom(128000.0 /* 128km equals 1 pixel */);
