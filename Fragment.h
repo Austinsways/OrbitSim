@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class Fragment : public Shortlived {
+class Fragment : public ShortLived {
 public:
 	Fragment() {}
 	Fragment(Position position, Velocity velocity) {}

@@ -1,17 +1,20 @@
 #pragma once
+
 #include "entity.h"
+#include "earth.h"
+#include "uiDraw.h"
 
 using namespace std;
 
-class Shortlived : public Entity
+class ShortLived : public Entity
 {
 protected:
 	int life;
 	float launchOffset;
 public:
-	Shortlived() {}
-	Shortlived(Position position, Velocity velocity) {}
-	Shortlived(Position position, Velocity velocity, float LaunchAngle) {}
-	virtual int dropLife() {}
-	virtual void draw() = 0;
+	ShortLived() {}
+	ShortLived(Position position, Velocity velocity) {}
+	ShortLived(Position position, Velocity velocity, double launchAngle) {}
+	virtual void advance(const Earth& earth) {}
+	virtual void draw(ogstream& gout) = 0;
 };

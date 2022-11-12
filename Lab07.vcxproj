@@ -147,10 +147,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acceleration.h" />
-    <ClInclude Include="chaser.h" />
     <ClInclude Include="earth.h" />
     <ClInclude Include="entity.h" />
-    <ClInclude Include="Fragment.h" />
+    <ClInclude Include="fragment.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="Projectile.h" />

@@ -4,10 +4,11 @@
 #include "entity.h"
 #include "earth.h"
 #include "uiDraw.h"
-#include "chaser.h"
+#include "ship.h"
+
 #include <vector>
-//include dreamchaser
-using namespace std;
+#include <list>
+#include <memory>
 
 class TestGame;
 
@@ -18,15 +19,15 @@ public:
 
 	void advance() {};
 	void draw() {};
-
 	
 private:
 	Earth earth;
-	Chaser dreamChaser;
-	vector<Entity> entitys[]; //this needs to be a vector currently because Entity is abstract
-	void control() {};
+	// The Ship will live inside the list of entities, but we will keep a pointer to it for convenience.
+	shared_ptr<Ship> ship;
+	std::list<Entity> entities;
+	void controlShip() {};
 	void moveEntitys() {};
 	void handleCollisions() {};
 	bool checkCollision(Entity &eOne, Entity &eTwo) {};
-	bool checkCollision(Entity &eOne, Earth &eTwo) {};
+	bool checkCollision(Entity &entity, Earth &earth) {};
 };

@@ -51,9 +51,11 @@ public:
    void addPixelsY(double dyPixels)      { setPixelsY(getPixelsY() + dyPixels);     }
 
    // deal with the ratio of meters to pixels
-   void setZoom(double metersFromPixels)
+   // void setZoom(double metersFromPixels)
+   static void setZoom(double metersFromPixels)
    {
-      this->metersFromPixels = metersFromPixels;
+      //this->metersFromPixels = metersFromPixels;
+      Position::metersFromPixels = metersFromPixels;
    }
    double getZoom() const { return metersFromPixels; }
 

@@ -71,9 +71,6 @@
     <ClInclude Include="game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="chaser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Sattelite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -83,7 +80,7 @@
     <ClInclude Include="Projectile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Fragment.h">
+    <ClInclude Include="fragment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

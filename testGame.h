@@ -2,7 +2,7 @@
 
 #define _USE_MATH_DEFINES
 
-#include "acceleration.h"
+#include "position.h"
 #include "earth.h"
 #include "ship.h"
 #include "game.h"
@@ -27,10 +27,9 @@ public:
 	void advance() { assert(false); }
 };
 
-class ConcreteEntityDummy : public Entity  //this is an entity dummy that is not abstract to represent any entity properly
+class EntityDummy : public Entity  //this is an entity dummy that is not abstract to represent any entity properly
 {
 public:
-	
 	virtual void setPosition(Position pos) { assert(false); }
 	virtual Position getPosition() const { assert(false); }
 	virtual void setVelocity(Velocity vel) { assert(false); }
@@ -41,124 +40,63 @@ public:
 	virtual bool isDead() const { assert(false); }
 	virtual std::list<Entity> destroy() { assert(false); }
 	virtual void draw(ogstream& gout) { assert(false); }
-
 };
 
-class ConcreteSatteliteDummy : public Sattelite
-{
-public:
-	
-	virtual void setPosition(Position pos) { assert(false); }
-	virtual Position getPosition() const { assert(false); }
-	virtual void setVelocity(Velocity vel) { assert(false); }
-	virtual Velocity getVelocity() const { assert(false); }
-	virtual double getRadius() const { assert(false); }
-	virtual void advance(const Earth& earth) { assert(false); }
-	virtual void kill() { assert(false); }
-	virtual bool isDead() const { assert(false); }
-	virtual std::list<Entity> destroy() { assert(false); }
-	virtual void draw(ogstream& gout) { assert(false); }
-	virtual void draw() { assert(false); };
-};
-
-class FragmentDummy : public Fragment
-{
-	virtual void setPosition(Position pos) { assert(false); }
-	virtual Position getPosition() const { assert(false); }
-	virtual void setVelocity(Velocity vel) { assert(false); }
-	virtual Velocity getVelocity() const { assert(false); }
-	virtual double getRadius() const { assert(false); }
-	virtual void advance(const Earth& earth) { assert(false); }
-	virtual void kill() { assert(false); }
-	virtual bool isDead() const { assert(false); }
-	virtual std::list<Entity> destroy() { assert(false); }
-	virtual void draw(ogstream& gout) { assert(false); }
-	virtual void draw() { assert(false); };
-};
-
-class AccelerationDummy : public Acceleration
-{
-public:
-	double getDdx() { assert(false); }
-	double getDdy() { assert(false); }
-};
-
-class AccelerationStubZero : public AccelerationDummy
-{
-public:
-	double getDdx() { return 0.0; }
-	double getDdy() { return 0.0; }
-};
-
-class EarthStubTimePerFrame1 : public EarthDummy
-{
-public:
-	double getTimePerFrame() { return 1.0; }
-};
-
-class EarthStubNoGravity : public EarthStubTimePerFrame1
-{
-public:
-	Acceleration calculateGravity(Entity entity) { return AccelerationStubZero(); }
-};
-
-class AccelerationStubDdx100 : public AccelerationDummy
-{
-public:
-	double getDdx() { return 100.0; }
-	double getDdy() { return 0.0; }
-};
-
-class EarthStubGravityDdx100 : public EarthStubTimePerFrame1
-{
-public:
-	Acceleration calculateGravity(Entity entity) { return AccelerationStubDdx100(); }
-};
-
-static int movementsOfEarthAdvance;
 class EarthSpyAdvance : public EarthDummy
 {
 public:
-	void advance() { movementsOfEarthAdvance++; };
+	void advance() { timesAdvanceCalled++; };
+	static int timesAdvanceCalled;
 };
 
-static int movementsOfEntityAdvance;
-class EntitySpyAdvance : public ConcreteEntityDummy
+class EntitySpyAdvance : public EntityDummy
 {
 public:
-	void advance() { movementsOfEntityAdvance++; };
+	void advance() { timesAdvanceCalled++; };
+	static int timesAdvanceCalled;
 };
 
 //this returns the items location as the middle of the board
-class StubEntityPosCenter : public ConcreteEntityDummy
+class StubEntityPosCenter : public EntityDummy
 {
 public:
-	Position getPosition() { return Position((int)0, (int)0); }
+	Position getPosition() { return Position(0.0, 0.0); }
 };
 
-//this returns the earth at the center of the board.
-class StubEarthPosCenter : public EarthDummy
+class StubEntity_x0_y0_r10 : public EntityDummy
 {
 public:
-	Position position = Position((int)0, (int)0);
-	Position getPosition() { return Position((int)0, (int)0); }
+	Position getPosition() const { return Position(0.0, 0.0); }
+	double getRadius() const { return 10.0; }
 };
 
-class StubSattelitePosCenter : public ConcreteSatteliteDummy
+class StubEntity_x10_y0_r10 : public EntityDummy
 {
 public:
-	Position getPosition() {return Position((int)0, (int)0);}
+	Position getPosition() const { return Position(10.0, 0.0); }
+	double getRadius() const { return 10.0; }
 };
 
-class StubFragmentPosCenter : public FragmentDummy
+class StubEntity_x20_y0_r10 : public EntityDummy
 {
 public:
-	Position getPosition() { return Position(0, 0); }
+	Position getPosition() const { return Position(20.0, 0.0); }
+	double getRadius() const { return 10.0; }
 };
 
+class StubEntity_x50_y0_r10 : public EntityDummy
+{
+public:
+	Position getPosition() const { return Position(50.0, 0.0); }
+	double getRadius() const { return 10.0; }
+};
 
-
-
+class StubEarth_x0_y0_r10 : public EarthDummy
+{
+public:
+	Position getPosition() { return Position(0.0, 0.0); }
+	double getRadius() const { return 10.0; }
+};
 
 /**************************************************
  * TEST Game
@@ -169,109 +107,178 @@ class TestGame
 public:
 	void run()
 	{
-		normalAdvanceEarth();
-		normalAdvanceEntity();
-		entityCollision();
-		concreteEarth();
-		properConstruction();
-		satteliteCrash();
-		fragmentCrash();
+		advance_earthMoved();
+		advance_entitiesMoved();
+		checkCollision_entitiesOverlapping();
+		checkCollision_entitiesTouching();
+		checkCollision_entitiesNotTouching();
+		checkCollision_entityAndEarthOverlapping();
+		checkCollision_entityAndEarthTouching();
+		checkCollision_entityAndEarthNotTouching();
 	}
 
 private:
-	//All entities should progress once each time the advance function is called
-	void normalAdvanceEarth() {
-		//setup
+	/**************************************************
+	 * ADVANCE - Check that the advance function is called once for the Earth
+	 **************************************************/
+	void advance_earthMoved() {
+		// setup
 		Game game;
 		EarthSpyAdvance earthSpy;
+		EarthSpyAdvance::timesAdvanceCalled = 0;
 		game.earth = earthSpy;
-		//excersize
+
+		// exercise
 		game.advance();
-		//verify
-		assert(movementsOfEarthAdvance == 1);
-		//teardown
+
+		// verify
+		assert(EarthSpyAdvance::timesAdvanceCalled == 1);
+
+		// teardown
 	}
 
-	void normalAdvanceEntity() {
-		//setup
+	/**************************************************
+	 * ADVANCE - Check that the advance function is called once per Entity
+	 **************************************************/
+	void advance_entitiesMoved() {
+		// setup
 		Game game;
-		EntitySpyAdvance entitySpy;
-		game.entitys->push_back(entitySpy); //adding the spy to the list of entitys
-		//excersize
+		EntitySpyAdvance entitySpy1;
+		EntitySpyAdvance entitySpy2;
+		EntitySpyAdvance::timesAdvanceCalled = 0;
+		game.entities = { entitySpy1, entitySpy2 };
+
+		//exercise
 		game.advance();
+
 		//verify
-		assert(movementsOfEntityAdvance == 1);
+		assert(EntitySpyAdvance::timesAdvanceCalled == 2);
+
 		//teardown
 	}
 
-	void entityCollision() {
+	/**************************************************
+	 * CHECK COLLISION (ENTITY V ENTITY) - The two are overlapping
+	 **************************************************/
+	void checkCollision_entitiesOverlapping() {
 		//setup 
+		Position::setZoom(1.0);
 		Game game;
-		//two entitys overlapping eachother/colliding
-		StubEntityPosCenter entity1;
-		StubEntityPosCenter entity2;
 
-		//excersize
+		StubEntity_x0_y0_r10 entity1;
+		StubEntity_x10_y0_r10 entity2;
+
+		//exercise
 		bool collided = game.checkCollision(entity1, entity2);
+
 		//verify
 		assert(collided);
+
 		//teardown
 	}
 
-	//ensure earth doesnt move when collided with
-	void concreteEarth() {
+	/**************************************************
+	 * CHECK COLLISION (ENTITY V ENTITY) - The two are tocuhing, which counts as a collision
+	 **************************************************/
+	void checkCollision_entitiesTouching()
+	{
 		//setup 
+		Position::setZoom(1.0);
 		Game game;
-		//two entitys overlapping eachother/colliding
-		StubEntityPosCenter entity1;
-		StubEarthPosCenter earth1;
 
-		//excersize
-		bool collided = game.checkCollision(entity1, earth1);
+		StubEntity_x0_y0_r10 entity1;
+		StubEntity_x20_y0_r10 entity2;
+
+		//exercise
+		bool collided = game.checkCollision(entity1, entity2);
+
 		//verify
 		assert(collided);
-		earth1.position.getMetersX();
-		assert(earth1.position.getMetersX() == 0.0);
-		assert(earth1.position.getMetersY() == 0.0);
+
 		//teardown
 	}
 
-	//game has all the necessary starting items
-	void properConstruction() {
-		//setup
+	/**************************************************
+	 * CHECK COLLISION (ENTITY V ENTITY) - The two are not touching
+	 **************************************************/
+	void checkCollision_entitiesNotTouching()
+	{
+		//setup 
+		Position::setZoom(1.0);
 		Game game;
-		Earth blankEarth;
-		//excersize
-		//excersize completed in basic constructor
+
+		StubEntity_x0_y0_r10 entity1;
+		StubEntity_x50_y0_r10 entity2;
+
+		//exercise
+		bool collided = game.checkCollision(entity1, entity2);
+
 		//verify
-		assert(game.entitys);
-		assert(&game.earth);
-		assert(&game.dreamChaser);
+		assert(!collided);
+
+		//teardown
+	}
+	
+	/**************************************************
+	 * CHECK COLLISION (ENTITY V EARTH) - The two are overlapping
+	 * (For simplicity, the following tests will use an Earth with radius 10.0)
+	 **************************************************/
+	void checkCollision_entityAndEarthOverlapping() {
+		//setup 
+		Position::setZoom(1.0);
+		Game game;
+
+		StubEntity_x10_y0_r10 entity;
+		StubEarth_x0_y0_r10 earth;
+
+		//exercise
+		bool collided = game.checkCollision(entity, earth);
+
+		//verify
+		assert(collided);
+
 		//teardown
 	}
 
-
-	void satteliteCrash() {
-		//setup
+	/**************************************************
+	 * CHECK COLLISION (ENTITY V EARTH) - The two are touching, which counts as a collision
+	 **************************************************/
+	void checkCollision_entityAndEarthTouching()
+	{
+		//setup 
+		Position::setZoom(1.0);
 		Game game;
-		StubSattelitePosCenter sattelite1;
-		StubSattelitePosCenter sattelite2;
-		//excersize
-		bool collided = game.checkCollision(sattelite1, sattelite2);
+
+		StubEntity_x20_y0_r10 entity;
+		StubEarth_x0_y0_r10 earth;
+
+		//exercise
+		bool collided = game.checkCollision(entity, earth);
+
 		//verify
 		assert(collided);
-		//teardown0
+
+		//teardown
 	}
 
-	void fragmentCrash() {
-		//setup
+	/**************************************************
+	 * CHECK COLLISION (ENTITY V EARTH) - The two are not touching
+	 **************************************************/
+	void checkCollision_entityAndEarthNotTouching()
+	{
+		//setup 
+		Position::setZoom(1.0);
 		Game game;
-		StubFragmentPosCenter fragment1;
-		StubFragmentPosCenter fragment2;
-		//excersize
-		bool collided = game.checkCollision(fragment1, fragment2);
+
+		StubEntity_x50_y0_r10 entity;
+		StubEarth_x0_y0_r10 earth;
+
+		//exercise
+		bool collided = game.checkCollision(entity, earth);
+
 		//verify
-		assert(collided);
+		assert(!collided);
+
 		//teardown
 	}
 };

@@ -3,6 +3,6 @@
 
 using namespace std;
 
-class Projectile : public Shortlived {
+class Projectile : public ShortLived {
 
 };

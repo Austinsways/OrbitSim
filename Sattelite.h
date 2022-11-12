@@ -1,16 +1,17 @@
 #pragma once
-#include "entity.h"
 
+#include "entity.h"
+#include "uiDraw.h"
 
 using namespace std;
 
-class Sattelite : public Entity {
+class Satellite : public Entity {
 protected:
 	float breakOffset;
 public:
-	Sattelite() {}
-	Sattelite(Position position, Velocity velocity) {}
-	Sattelite(Position position, Velocity velocity, float BreakAngle) {}
+	Satellite() {}
+	Satellite(Position position, Velocity velocity) {}
+	Satellite(Position position, Velocity velocity, double breakAngle) {}
 
-	virtual void draw() = 0;
+	virtual void draw(ogstream& gout) = 0;
 };
