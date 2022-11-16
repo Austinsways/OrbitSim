@@ -22,10 +22,10 @@
 #include "position.h"   // for POINT
 #include "game.h"
 
-//#define TEST
-#ifdef DEBUG
+#define TEST
+#ifdef TEST
 #include "test.h"
-#endif // DEBUG
+#endif // TEST
 
 
 using namespace std;
@@ -76,6 +76,9 @@ using namespace std;
 void callBack(const Interface* pUI, void* p)
 {
    Game* pGame = (Game*)p;
+   pGame->advance();
+   pGame->draw();
+
    //Prototype* pProto = (Prototype*)p;
 
    //// Calculate time dilation
@@ -140,10 +143,10 @@ int WINAPI wWinMain(
 int main(int argc, char** argv)
 #endif // !_WIN32
 {
-#ifdef DEBUG
+#ifdef TEST
    // Run tests in debug mode
    testRunner();
-#endif // DEBUG
+#endif // TEST
 
 
    // Initialize OpenGL
@@ -155,13 +158,6 @@ int main(int argc, char** argv)
       "Prototype",   /* name on the window */
       ptUpperRight);
 
-   // Initialize the demo
-   //Demo demo(ptUpperRight);
-
-   // set everything into action
-   //ui.run(callBack, &prototype);
-
-   //Prototype prototype(ptUpperRight);
    Game game(ptUpperRight);
    ui.run(callBack, &game);
 
