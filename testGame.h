@@ -12,6 +12,9 @@
 
 #include <cmath>
 #include <cassert>
+#include <memory>
+
+using namespace std;
 
 /**************************************************
  * DOUBLES
@@ -19,26 +22,26 @@
 class EarthDummy : public Earth
 {
 public:
-	Acceleration calculateGravity(Entity entity) { assert(false); }
-	Position getPosition() { assert(false); }
-	double getRadius() { assert(false); }
-	double getTimeDilation() { assert(false); }
-	void draw() { assert(false); }
+	Acceleration calculateGravity(const Entity& entity) const { assert(false); return Acceleration(); }
+	Position getPosition() const { assert(false); return Position(); }
+	double getRadius() const { assert(false); return 0.0; }
+	double getTimeDilation() const { assert(false); return 0.0; }
+	void draw() const { assert(false); }
 	void advance() { assert(false); }
 };
 
 class EntityDummy : public Entity  //this is an entity dummy that is not abstract to represent any entity properly
 {
 public:
-	virtual void setPosition(Position pos) { assert(false); }
-	virtual Position getPosition() const { assert(false); }
-	virtual void setVelocity(Velocity vel) { assert(false); }
-	virtual Velocity getVelocity() const { assert(false); }
-	virtual double getRadius() const { assert(false); }
+	virtual void setPosition(const Position& pos) { assert(false); }
+	virtual Position getPosition() const { assert(false); return Position(); }
+	virtual void setVelocity(const Velocity& vel) { assert(false); }
+	virtual Velocity getVelocity() const { assert(false); return Velocity(); }
+	virtual double getRadius() const { assert(false); return 0.0; }
 	virtual void advance(const Earth& earth) { assert(false); }
 	virtual void kill() { assert(false); }
-	virtual bool isDead() const { assert(false); }
-	virtual std::list<Entity> destroy() { assert(false); }
+	virtual bool isDead() const { assert(false); return false; }
+	virtual list<unique_ptr<Entity>> destroy() { assert(false); return list<unique_ptr<Entity>>(); }
 	virtual void draw(ogstream& gout) { assert(false); }
 };
 
@@ -48,6 +51,7 @@ public:
 	void advance() { timesAdvanceCalled++; };
 	static int timesAdvanceCalled;
 };
+int EarthSpyAdvance::timesAdvanceCalled = 0;
 
 class EntitySpyAdvance : public EntityDummy
 {
@@ -55,12 +59,13 @@ public:
 	void advance() { timesAdvanceCalled++; };
 	static int timesAdvanceCalled;
 };
+int EntitySpyAdvance::timesAdvanceCalled = 0;
 
 //this returns the items location as the middle of the board
 class StubEntityPosCenter : public EntityDummy
 {
 public:
-	Position getPosition() { return Position(0.0, 0.0); }
+	Position getPosition() const { return Position(0.0, 0.0); }
 };
 
 class StubEntity_x0_y0_r10 : public EntityDummy
@@ -146,7 +151,12 @@ private:
 		EntitySpyAdvance entitySpy1;
 		EntitySpyAdvance entitySpy2;
 		EntitySpyAdvance::timesAdvanceCalled = 0;
-		game.entities = { entitySpy1, entitySpy2 };
+		//game.entities = {
+		//	make_unique<Entity>(entitySpy1),
+		//	make_unique<Entity>(entitySpy2)
+		//};
+		game.entities.push_back(make_unique<EntitySpyAdvance>(entitySpy1));
+		game.entities.push_back(make_unique<EntitySpyAdvance>(entitySpy2));
 
 		//exercise
 		game.advance();

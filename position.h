@@ -59,6 +59,11 @@ public:
    }
    double getZoom() const { return metersFromPixels; }
 
+   bool operator==(const Position& rhs)
+   {
+      return x == rhs.getMetersX() && y == rhs.getMetersY();
+   }
+
 private:
    double x;                 // horizontal position
    double y;                 // vertical position

@@ -1,12 +1,16 @@
 #pragma once
+
 #include "shortLived.h"
+#include "uiDraw.h"
 
-using namespace std;
-
-class Fragment : public ShortLived {
+class Fragment : public ShortLived
+{
 public:
-	Fragment() {}
-	Fragment(Position position, Velocity velocity) {}
-	Fragment(Position position, Velocity velocity, float launchAngle) {}
-	void draw(ogstream gout) {}
+   Fragment() {}
+   Fragment(const Position& position, const Velocity& velocity) {}
+   Fragment(const Position& position, const Velocity& velocity, float launchAngle) {}
+   void draw(ogstream& gout) {}
+
+private:
+   void init() { life = (int)random(50.0, 100.0); }
 };

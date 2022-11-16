@@ -1,64 +1,66 @@
 #pragma once
 
 #define _USE_MATH_DEFINES
+#include <math.h>
 
 #include "acceleration.h"
 #include "earth.h"
 #include "ship.h"
 
-#include <cmath>
 #include <cassert>
 
 /**************************************************
  * DOUBLES
  **************************************************/
-class EarthDummy : public Earth
+class EarthDummy2 : public Earth
 {
 public:
-	Acceleration calculateGravity(Entity entity) { assert(false); }
-	Position getPosition() { assert(false); }
-	double getRadius() { assert(false); }
-	double getTimeDilation() { assert(false); }
-	void draw() { assert(false); }
+	Acceleration calculateGravity(const Entity& entity) const { assert(false); return Acceleration(); }
+	Position getPosition() const { assert(false); return Position(); }
+	double getRadius() const { assert(false); return 0.0; }
+	double getTimeDilation() const { assert(false); return 0.0; }
+	void draw() const { assert(false); }
 };
 
 class AccelerationDummy : public Acceleration
 {
 public:
-	double getDdx() { assert(false); }
-	double getDdy() { assert(false); }
+	double getDdx() const { assert(false); }
+	double getDdy() const { assert(false); }
 };
 
 class AccelerationStubZero : public AccelerationDummy
 {
 public:
-	double getDdx() { return 0.0; }
-	double getDdy() { return 0.0; }
+	double getDdx() const { return 0.0; }
+	double getDdy() const { return 0.0; }
 };
 
-class EarthStubTimePerFrame1 : public EarthDummy
+class EarthStubTimePerFrame1 : public EarthDummy2
 {
 public:
-	double getTimePerFrame() { return 1.0; }
+	double getTimePerFrame() const { return 1.0; }
 };
 
 class EarthStubNoGravity : public EarthStubTimePerFrame1
 {
 public:
-	Acceleration calculateGravity(Entity entity) { return AccelerationStubZero(); }
+	Acceleration calculateGravity(const Entity& entity) const { return AccelerationStubZero(); }
 };
 
 class AccelerationStubDdx100 : public AccelerationDummy
 {
 public:
-	double getDdx() { return 100.0; }
-	double getDdy() { return 0.0; }
+	double getDdx() const { return 100.0; }
+	double getDdy() const { return 0.0; }
 };
 
 class EarthStubGravityDdx100 : public EarthStubTimePerFrame1
 {
 public:
-	Acceleration calculateGravity(Entity entity) { return AccelerationStubDdx100(); }
+	Acceleration calculateGravity(const Entity& entity) const {
+		return AccelerationStubDdx100();
+	}
 };
 
 /**************************************************

@@ -1,8 +1,15 @@
 #pragma once
+
 #include "shortLived.h"
 
-using namespace std;
+class Projectile : public ShortLived
+{
+public:
+   Projectile() : ShortLived() { init(); }
+   Projectile(const Position& position, const Velocity& velocity) : ShortLived(position, velocity) { init(); }
+   Projectile(const Position& position, const Velocity& velocity, float launchAngle) : ShortLived(position, velocity, launchAngle) { init(); }
+   void draw(ogstream& gout) {}
 
-class Projectile : public ShortLived {
-
+private:
+   void init() { life = 70; }
 };

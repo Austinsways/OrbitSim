@@ -139,6 +139,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="earth.cpp" />
+    <ClCompile Include="entity.cpp" />
+    <ClCompile Include="game.cpp" />
     <ClCompile Include="orbit.cpp" />
     <ClCompile Include="position.cpp" />
     <ClCompile Include="test.cpp" />

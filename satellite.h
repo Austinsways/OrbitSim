@@ -5,13 +5,15 @@
 
 using namespace std;
 
-class Satellite : public Entity {
-protected:
-	float breakOffset;
+class Satellite : public Entity
+{
 public:
-	Satellite() {}
-	Satellite(Position position, Velocity velocity) {}
-	Satellite(Position position, Velocity velocity, double breakAngle) {}
+	Satellite() : breakOffset(4.0) {}
+	Satellite(const Position& position, const Velocity& velocity) : breakOffset(4.0) {}
+	Satellite(const Position& position, const Velocity& velocity, double breakAngle) : breakOffset(4.0) {}
 
 	virtual void draw(ogstream& gout) = 0;
+
+protected:
+	double breakOffset;
 };
