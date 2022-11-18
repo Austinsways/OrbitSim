@@ -57,7 +57,7 @@ public:
       //this->metersFromPixels = metersFromPixels;
       Position::metersFromPixels = metersFromPixels;
    }
-   double getZoom() const { return metersFromPixels; }
+   static double getZoom(){ return metersFromPixels; }
 
    bool operator==(const Position& rhs)
    {

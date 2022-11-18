@@ -60,14 +60,75 @@ void Game::moveEntities()
 
 void Game::handleCollisions()
 {
+    //we have to check all entitys against eachother. 
+    for (auto entityOne = entities.begin(); entityOne != entities.end(); entityOne++) {
+        //double for loops are required for this design
+        for (auto entityTwo = entities.begin(); entityTwo != entities.end(); entityTwo++) {
+            bool collided = checkCollision(**entityOne, **entityTwo);
+            //add logic to destroy entitys and create fragments
+            if (collided) {
+                list<shared_ptr<Entity>> fragments = entityOne->get()->destroy(); //get the object from its shared pointer then call the destroy function
+                for (auto fragment : fragments) {
+                    entities.push_back(fragment); //append all the newly created fragments
+                }
+                entityOne->get()->kill();
+                //entityOne has been destroyed and erased from the list, now its time for entityTwo
+                if (collided) {
+                    list<shared_ptr<Entity>> fragments = entityTwo->get()->destroy(); //get the object from its shared pointer then call the destroy function
+                    for (auto fragment : fragments) {
+                        entities.push_back(fragment); //append all the newly created fragments
+                    }
+                }
+                entityTwo->get()->kill();
+
+                entities.remove_if(entityOne->get()->isDead());
+            }
+            
+        }
+    }
+
+    entities.remove_if(entities.begin(), entities.end(),Entity::entityDead);
+
+    //we need to check earth against all entitys
+    int locationVSStart = 0;
+    for (auto i = entities.begin(); i != entities.end(); i++) 
+    {
+        bool collided = checkCollision(**i, earth);
+        if (collided) 
+        {
+            list<shared_ptr<Entity>> fragments = i->get()->destroy(); //get the object from its shared pointer then call the destroy function
+            for (auto fragment : fragments) 
+            {
+                entities.push_back(fragment); //append all the newly created fragments
+            }
+            
+            entities.erase(i);
+            locationVSStart += 1;
+            
+        }
+    }
 }
 
 bool Game::checkCollision(const Entity& eOne, const Entity& eTwo)
 {
-    return false;
+    //check if the items have collided, if they have return true
+    double combinedRadii = eOne.getRadius() + eTwo.getRadius();
+    Position entity1Pos = eOne.getPosition();
+    Position entity2Pos = eTwo.getPosition();
+    double distanceBetweenX = abs(entity1Pos.getMetersX() - entity2Pos.getMetersX());
+    double distanceBetweenY = abs(entity1Pos.getMetersY() - entity2Pos.getMetersY());
+    return (distanceBetweenX <= combinedRadii && distanceBetweenY <= combinedRadii); 
+    //if both are less than than the radii then they are too close. Otherwise they arent colliding.
 }
 
 bool Game::checkCollision(const Entity& entity, const Earth& earth)
 {
-    return false;
+    //check if the items have collided, if they have return true
+    double combinedRadii = entity.getRadius() + earth.getRadius();
+    Position entity1Pos = entity.getPosition();
+    Position earthPos = earth.getPosition();
+    double distanceBetweenX = abs(entity1Pos.getMetersX() - earthPos.getMetersX());
+    double distanceBetweenY = abs(entity1Pos.getMetersY() - earthPos.getMetersY());
+    return (distanceBetweenX <= combinedRadii && distanceBetweenY <= combinedRadii);
+    //if both are less than than the radii then they are too close. Otherwise they arent colliding.
 }

@@ -11,7 +11,7 @@ class Entity;
 class Earth
 {
 public:
-   Earth() : radius(0.0), angle(0.0) {
+   Earth() : radius(6378000), angle(0.0) {
       timePerFrame = 24.0 * 60.0 * Interface().frameRate();
    }
    virtual Acceleration calculateGravity(const Entity& entity) const;

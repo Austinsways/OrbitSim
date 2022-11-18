@@ -16,7 +16,7 @@ public:
    Ship(const Position& pos, const Velocity& vel, double angle) : Entity(pos, vel)
    {
       this->angle = angle;
-      radius = 10.0;
+      radius = (10*128000);
       thrust = false;
    }
    void turnLeft() { angle -= 0.1; }
