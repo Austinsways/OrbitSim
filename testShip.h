@@ -25,8 +25,8 @@ public:
 class AccelerationDummy : public Acceleration
 {
 public:
-	double getDdx() const { assert(false); }
-	double getDdy() const { assert(false); }
+	double getDdx() const { assert(false); return 0.0; }
+	double getDdy() const { assert(false); return 0.0; }
 };
 
 class AccelerationStubZero : public AccelerationDummy

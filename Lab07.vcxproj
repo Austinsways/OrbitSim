@@ -144,9 +144,11 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="orbit.cpp" />
     <ClCompile Include="position.cpp" />
+    <ClCompile Include="ship.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="uiDraw.cpp" />
     <ClCompile Include="uiInteract.cpp" />
+    <ClCompile Include="velocity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acceleration.h" />

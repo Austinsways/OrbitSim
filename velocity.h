@@ -1,5 +1,7 @@
 #pragma once
 
+#include "acceleration.h"
+
 class Velocity
 {
 public:
@@ -7,6 +9,7 @@ public:
 	Velocity(double dx, double dy) : dx(dx), dy(dy) {}
    double getDx() const { return dx; }
    double getDy() const { return dy; }
+   void applyAcceleration(const Acceleration& acc);
 
    bool operator==(const Velocity& rhs)
    {

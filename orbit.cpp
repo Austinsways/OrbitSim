@@ -22,7 +22,7 @@
 #include "position.h"   // for POINT
 #include "game.h"
 
-#define TEST
+//#define TEST
 #ifdef TEST
 #include "test.h"
 #endif // TEST
@@ -76,7 +76,7 @@ using namespace std;
 void callBack(const Interface* pUI, void* p)
 {
    Game* pGame = (Game*)p;
-   pGame->advance();
+   pGame->advance(pUI);
    pGame->draw();
 
    //Prototype* pProto = (Prototype*)p;

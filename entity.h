@@ -14,16 +14,16 @@ class Entity
 {
 public:
    Entity() : radius(0.0), angle(0.0), dead(false) {}
-   Entity(const Position& pos, const Velocity& vel) : radius(0.0), angle(0.0), dead(false) {}
+   Entity(const Position& pos, const Velocity& vel) : position(pos), velocity(vel), radius(0.0), angle(0.0), dead(false) {}
    virtual void setPosition(const Position& pos) { position = pos; }
    virtual Position getPosition() const { return position; }
    virtual void setVelocity(const Velocity& vel) { velocity = vel; }
    virtual Velocity getVelocity() const { return velocity; }
    virtual double getRadius() const { return radius; }
-   virtual void advance(const Earth& earth) {}
-   virtual void kill() {}
+   virtual void advance(const Earth& earth);
+   virtual void kill() { dead = true; }
    virtual bool isDead() const { return dead; }
-   virtual std::list<std::unique_ptr<Entity>> destroy();
+   virtual std::list<std::shared_ptr<Entity>> destroy();
    virtual void draw(ogstream& gout) = 0;
 
 protected:

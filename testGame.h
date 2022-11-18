@@ -41,7 +41,7 @@ public:
 	virtual void advance(const Earth& earth) { assert(false); }
 	virtual void kill() { assert(false); }
 	virtual bool isDead() const { assert(false); return false; }
-	virtual list<unique_ptr<Entity>> destroy() { assert(false); return list<unique_ptr<Entity>>(); }
+	virtual list<shared_ptr<Entity>> destroy() { assert(false); return list<shared_ptr<Entity>>(); }
 	virtual void draw(ogstream& gout) { assert(false); }
 };
 
@@ -132,9 +132,10 @@ private:
 		EarthSpyAdvance earthSpy;
 		EarthSpyAdvance::timesAdvanceCalled = 0;
 		game.earth = earthSpy;
+		Interface ui;
 
 		// exercise
-		game.advance();
+		game.advance(&ui);
 
 		// verify
 		assert(EarthSpyAdvance::timesAdvanceCalled == 1);
@@ -157,9 +158,10 @@ private:
 		//};
 		game.entities.push_back(make_unique<EntitySpyAdvance>(entitySpy1));
 		game.entities.push_back(make_unique<EntitySpyAdvance>(entitySpy2));
+		Interface ui;
 
 		//exercise
-		game.advance();
+		game.advance(&ui);
 
 		//verify
 		assert(EntitySpyAdvance::timesAdvanceCalled == 2);
