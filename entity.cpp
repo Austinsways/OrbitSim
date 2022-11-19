@@ -7,7 +7,7 @@ using namespace std;
 void Entity::advance(const Earth& earth)
 {
    double t = earth.getTimePerFrame();
-   const Acceleration& gravity = earth.calculateGravity(*this);
+   Acceleration gravity = earth.calculateGravity(*this);
    double x = position.getMetersX() +
       velocity.getDx() * t +
       0.5 * gravity.getDdx() * t * t;

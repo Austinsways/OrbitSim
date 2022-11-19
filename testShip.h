@@ -25,20 +25,6 @@ public:
 	void draw() const { assert(false); }
 };
 
-class AccelerationDummy : public Acceleration
-{
-public:
-	double getDdx() const { assert(false); return 0.0; }
-	double getDdy() const { assert(false); return 0.0; }
-};
-
-class AccelerationStubZero : public AccelerationDummy
-{
-public:
-	double getDdx() const { return 0.0; }
-	double getDdy() const { return 0.0; }
-};
-
 class EarthStubTimePerFrame1 : public EarthDummy2
 {
 public:
@@ -48,21 +34,13 @@ public:
 class EarthStubNoGravity : public EarthStubTimePerFrame1
 {
 public:
-	Acceleration calculateGravity(const Entity& entity) const { return AccelerationStubZero(); }
-};
-
-class AccelerationStubDdx100 : public AccelerationDummy
-{
-public:
-	double getDdx() const { return 100.0; }
-	double getDdy() const { return 0.0; }
+	Acceleration calculateGravity(const Entity& entity) const { return Acceleration(0.0, 0.0); }
 };
 
 class EarthStubGravityDdx100 : public EarthStubTimePerFrame1
 {
 public:
 	Acceleration calculateGravity(const Entity& entity) const {
-		//return AccelerationStubDdx100();
 		return Acceleration(M_PI_2, 100.0);
 	}
 };
