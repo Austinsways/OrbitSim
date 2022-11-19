@@ -80,8 +80,8 @@ void Game::handleCollisions()
             }
             (*entityOne)->kill();
             //entityOne has been destroyed and erased from the list, now its time for entityTwo
-            list<shared_ptr<Entity>> fragments = (*entityTwo)->destroy(); //get the object from its shared pointer then call the destroy function
-            for (auto& fragment : fragments)
+            list<shared_ptr<Entity>> fragmentsTwo = (*entityTwo)->destroy(); //get the object from its shared pointer then call the destroy function
+            for (auto& fragment : fragmentsTwo)
             {
                entities.push_back(fragment); //append all the newly created fragments
             }
