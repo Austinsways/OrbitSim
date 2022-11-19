@@ -73,7 +73,7 @@ void Game::handleCollisions()
       {
          bool collided = checkCollision(**entityOne, **entityTwo);
          //add logic to destroy entitys and create fragments
-         if (collided)
+         if (collided && entityOne != entityTwo)
          {
             list<shared_ptr<Entity>> fragments = (*entityOne)->destroy(); //get the object from its shared pointer then call the destroy function
             for (auto& fragment : fragments)
