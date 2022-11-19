@@ -48,7 +48,6 @@ public:
 class EarthSpyAdvance : public EarthDummy
 {
 public:
-	Acceleration calculateGravity(const Entity& entity) const { return Acceleration(); }
 	void advance() { timesAdvanceCalled++; };
 	static int timesAdvanceCalled;
 };
@@ -57,12 +56,11 @@ int EarthSpyAdvance::timesAdvanceCalled = 0;
 class EntitySpyAdvance : public EntityDummy
 {
 public:
-	void advance() { timesAdvanceCalled++; };
+	void advance(const Earth& earth) { timesAdvanceCalled++; };
 	static int timesAdvanceCalled;
 };
 int EntitySpyAdvance::timesAdvanceCalled = 0;
 
-//this returns the items location as the middle of the board
 class StubEntityPosCenter : public EntityDummy
 {
 public:
@@ -100,7 +98,7 @@ public:
 class StubEarth_x0_y0_r10 : public EarthDummy
 {
 public:
-	Position getPosition() { return Position(0.0, 0.0); }
+	Position getPosition() const { return Position(0.0, 0.0); }
 	double getRadius() const { return 10.0; }
 };
 
@@ -113,8 +111,8 @@ class TestGame
 public:
 	void run()
 	{
-		advance_earthMoved();
-		advance_entitiesMoved();
+		moveEntities_earthMoved();
+		moveEntities_twoEntitiesMoved();
 		checkCollision_entitiesOverlapping();
 		checkCollision_entitiesTouching();
 		checkCollision_entitiesNotTouching();
@@ -127,15 +125,15 @@ private:
 	/**************************************************
 	 * ADVANCE - Check that the advance function is called once for the Earth
 	 **************************************************/
-	void advance_earthMoved() {
+	void moveEntities_earthMoved() {
 		// setup
 		Game game;
 		game.earth = make_unique<EarthSpyAdvance>();
 		EarthSpyAdvance::timesAdvanceCalled = 0;
-		Interface ui;
+		game.entities.clear();
 
 		// exercise
-		game.advance(&ui);
+		game.moveEntities();
 
 		// verify
 		assert(EarthSpyAdvance::timesAdvanceCalled == 1);
@@ -144,24 +142,20 @@ private:
 	}
 
 	/**************************************************
-	 * ADVANCE - Check that the advance function is called once per Entity
+	 * MOVE ENTITIES - Check that the advance function is called once per Entity
 	 **************************************************/
-	void advance_entitiesMoved() {
+	void moveEntities_twoEntitiesMoved() {
 		// setup
 		Game game;
 		EntitySpyAdvance entitySpy1;
 		EntitySpyAdvance entitySpy2;
 		EntitySpyAdvance::timesAdvanceCalled = 0;
-		//game.entities = {
-		//	make_unique<Entity>(entitySpy1),
-		//	make_unique<Entity>(entitySpy2)
-		//};
+		game.entities.clear();
 		game.entities.push_back(make_unique<EntitySpyAdvance>(entitySpy1));
 		game.entities.push_back(make_unique<EntitySpyAdvance>(entitySpy2));
-		Interface ui;
 
 		//exercise
-		game.advance(&ui);
+		game.moveEntities();
 
 		//verify
 		assert(EntitySpyAdvance::timesAdvanceCalled == 2);

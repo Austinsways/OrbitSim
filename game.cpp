@@ -3,6 +3,7 @@
 
 #include "game.h"
 #include "ship.h"
+#include "entity.h"
 #include "uiDraw.h"
 
 #include <memory>
