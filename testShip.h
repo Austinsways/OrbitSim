@@ -9,6 +9,9 @@
 
 #include <cassert>
 
+#include <iostream>
+using namespace std;
+
 /**************************************************
  * DOUBLES
  **************************************************/
@@ -218,7 +221,9 @@ private:
 
 		// verify
 		assert(ship.position == Position(0.0, 0.0));
-		assert(ship.velocity == Velocity(0.0, 130.0));
+		//assert(ship.velocity == Velocity(0.0, 130.0));  - accuracy issue
+		assert(int(10000000 * ship.velocity.getDx()) == int(10000000 * 0.0));
+		assert(int(10000000 * ship.velocity.getDy()) == int(10000000 * 130.0));
 
 	}  // teardown
 
@@ -238,7 +243,9 @@ private:
 
 		// verify
 		assert(ship.position == Position(0.0, 0.0));
-		assert(ship.velocity == Velocity(-70.0, 0.0));
+		//assert(ship.velocity == Velocity(-70.0, 0.0));  - accuracy issue
+		assert(int(10000000 * ship.velocity.getDx()) == int(10000000 * -70.0));
+		assert(int(10000000 * ship.velocity.getDy()) == int(10000000 * 0.0));
 
 	}  // teardown
 
@@ -260,7 +267,9 @@ private:
 		//
 		double xyComponent = 30.0 / M_SQRT2;
 		assert(ship.position == Position(0.0, 0.0));
-		assert(ship.velocity == Velocity(xyComponent, xyComponent));
+		// assert(ship.velocity == Velocity(xyComponent, xyComponent));  - accuracy issue
+		assert(int(10000000 * ship.velocity.getDx()) == int(10000000 * xyComponent));
+		assert(int(10000000 * ship.velocity.getDy()) == int(10000000 * xyComponent));
 
 	}  // teardown
 };
