@@ -24,7 +24,6 @@ public:
 	void draw() const;
 	
 private:
-	//Earth earth;
 	std::unique_ptr<Earth> earth;
 	// The Ship will live inside the list of entities, but we will keep a pointer to it for convenience.
 	std::shared_ptr<Entity> ship;

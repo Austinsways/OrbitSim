@@ -71,9 +71,8 @@ void Game::handleCollisions()
       //double for loops are required for this design
       for (auto entityTwo = entities.begin(); entityTwo != entities.end(); entityTwo++)
       {
-         bool collided = checkCollision(**entityOne, **entityTwo);
          //add logic to destroy entitys and create fragments
-         if (collided && entityOne != entityTwo)
+         if (entityOne != entityTwo && checkCollision(**entityOne, **entityTwo))
          {
             list<shared_ptr<Entity>> fragments = (*entityOne)->destroy(); //get the object from its shared pointer then call the destroy function
             for (auto& fragment : fragments)
