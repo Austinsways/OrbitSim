@@ -32,8 +32,8 @@ private:
 	void controlShip(const Interface* pUI);
 	void moveEntities();
 	void handleCollisions();
-	bool checkCollision(const Entity& eOne, const Entity& eTwo);
-	bool checkCollision(const Entity& entity, const Earth& earth);
+	bool checkCollision(const Entity& eOne, const Entity& eTwo) const;
+	bool checkCollision(const Entity& entity, const Earth& earth) const;
 
 	Position ptUpperRight;
 };
