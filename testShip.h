@@ -129,9 +129,8 @@ private:
 		ship.advance(EarthStubGravityDdx100());
 
 		// verify
-		assert(closeEnough(ship.position, Position(50.0, 0.0)));
-		//assert(ship.position == Position(50.0, 0.0));
-		assert(ship.velocity == Velocity(0.0, 0.0));
+		assert(closeEnough(ship.position, Position(150.0, 0.0)));
+		assert(closeEnough(ship.velocity, Velocity(100.0, 0.0)));
 
 	}  // teardown
 
@@ -149,8 +148,8 @@ private:
 		ship.advance(EarthStubGravityDdx100());
 
 		// verify
-		assert(closeEnough(ship.position, Position(75.0, 0.0)));
-		assert(ship.velocity == Velocity(25.0, 0.0));
+		assert(closeEnough(ship.position, Position(175.0, 0.0)));
+		assert(closeEnough(ship.velocity, Velocity(125.0, 0.0)));
 
 	}  // teardown
 
