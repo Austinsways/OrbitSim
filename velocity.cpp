@@ -1,8 +1,8 @@
 #include "velocity.h"
 #include "acceleration.h"
 
-void Velocity::applyAcceleration(const Acceleration& acc)
+void Velocity::applyAcceleration(const Acceleration& acc, double t)
 {
-   dx += acc.getDdx();
-   dy += acc.getDdy();
+   dx += acc.getDdx() * t;
+   dy += acc.getDdy() * t;
 }

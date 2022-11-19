@@ -8,6 +8,7 @@ void Entity::advance(const Earth& earth)
 {
    double t = earth.getTimePerFrame();
    Acceleration gravity = earth.calculateGravity(*this);
+   velocity.applyAcceleration(gravity, t);
    double x = position.getMetersX() +
       velocity.getDx() * t +
       0.5 * gravity.getDdx() * t * t;

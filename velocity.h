@@ -9,7 +9,7 @@ public:
 	Velocity(double dx, double dy) : dx(dx), dy(dy) {}
    double getDx() const { return dx; }
    double getDy() const { return dy; }
-   void applyAcceleration(const Acceleration& acc);
+   void applyAcceleration(const Acceleration& acc, double t);
 
    bool operator==(const Velocity& rhs)
    {

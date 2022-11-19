@@ -19,8 +19,8 @@ Acceleration Earth::calculateGravity(const Entity& entity) const
    double gravityMagnitude = GRAVITY_SEA_LEVEL *
       pow(EARTH_RADIUS / (EARTH_RADIUS + altitude), 2);
    double gravityDirection = atan2(
-      entityPos.getMetersY() - position.getMetersY(),
-      entityPos.getMetersX() - position.getMetersX()
+      position.getMetersX() - entityPos.getMetersX(),
+      position.getMetersY() - entityPos.getMetersY()
    );
 
    return Acceleration(gravityDirection, gravityMagnitude);
