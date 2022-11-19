@@ -1,3 +1,10 @@
+/**************************************************
+ * Authors:
+ * Eddie McConkie
+ * Austin Eldredge
+ * Lehi Lopez
+ **************************************************/
+
 #pragma once
 
 #include "shortLived.h"

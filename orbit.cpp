@@ -1,19 +1,10 @@
-/*************************************************************
- * 1. Name:
- *      Demo
- * 2. Assignment Name:
- *      Lab 07: Orbit Simulator
- * 3. Assignment Description:
- *      Simulate satellites orbiting the earth
- * 4. What was the hardest part? Be as specific as possible.
- *      ??
- * 5. How long did it take for you to complete the assignment?
- *      ??
- *****************************************************************/
+/**************************************************
+ * Authors:
+ * Eddie McConkie
+ * Austin Eldredge
+ * Lehi Lopez
+ **************************************************/
 
-
-//#define _USE_MATH_DEFINES
-//#include <cmath>
 #include <cassert>      // for ASSERT
 #include <array>
 

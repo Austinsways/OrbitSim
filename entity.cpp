@@ -1,3 +1,10 @@
+/**************************************************
+ * Authors:
+ * Eddie McConkie
+ * Austin Eldredge
+ * Lehi Lopez
+ **************************************************/
+
 #include "entity.h"
 #include "earth.h"
 #include "acceleration.h"

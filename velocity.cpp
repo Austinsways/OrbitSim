@@ -1,3 +1,10 @@
+/**************************************************
+ * Authors:
+ * Eddie McConkie
+ * Austin Eldredge
+ * Lehi Lopez
+ **************************************************/
+
 #include "velocity.h"
 #include "acceleration.h"
 

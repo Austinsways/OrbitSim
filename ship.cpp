@@ -1,3 +1,10 @@
+/**************************************************
+ * Authors:
+ * Eddie McConkie
+ * Austin Eldredge
+ * Lehi Lopez
+ **************************************************/
+
 #include "ship.h"
 
 void Ship::accelerate(const Earth& earth)
