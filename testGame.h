@@ -48,6 +48,7 @@ public:
 class EarthSpyAdvance : public EarthDummy
 {
 public:
+	Acceleration calculateGravity(const Entity& entity) const { return Acceleration(); }
 	void advance() { timesAdvanceCalled++; };
 	static int timesAdvanceCalled;
 };
@@ -129,9 +130,8 @@ private:
 	void advance_earthMoved() {
 		// setup
 		Game game;
-		EarthSpyAdvance earthSpy;
+		game.earth = make_unique<EarthSpyAdvance>();
 		EarthSpyAdvance::timesAdvanceCalled = 0;
-		game.earth = earthSpy;
 		Interface ui;
 
 		// exercise

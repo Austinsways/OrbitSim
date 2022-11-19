@@ -22,7 +22,7 @@
 #include "position.h"   // for POINT
 #include "game.h"
 
-//#define TEST
+#define TEST
 #ifdef TEST
 #include "test.h"
 #endif // TEST

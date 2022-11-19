@@ -19,13 +19,14 @@ void Game::advance(const Interface* pUI)
 void Game::draw() const
 {
    ogstream gout(ptUpperRight);
-   earth.draw(gout);
+   earth->draw(gout);
    for (auto& entity : entities)
       entity->draw(gout);
 }
 
 void Game::init()
 {
+   earth = make_unique<Earth>();
    Position pos;
    pos.setPixelsX(-450.0);
    pos.setPixelsY(450.0);
@@ -40,7 +41,7 @@ void Game::controlShip(const Interface* pUI)
    auto ship = dynamic_pointer_cast<Ship, Entity>(this->ship);
 
    if (pUI->isDown())
-      ship->accelerate(earth);
+      ship->accelerate(*earth);
 
    ship->setThrust(pUI->isDown());
 
@@ -53,9 +54,9 @@ void Game::controlShip(const Interface* pUI)
 
 void Game::moveEntities()
 {
-   earth.advance();
+   earth->advance();
    for (auto& entity : entities)
-      entity->advance(earth);
+      entity->advance(*earth);
 }
 
 // Predicate used for filtering out dead entities
@@ -93,7 +94,7 @@ void Game::handleCollisions()
    //we need to check earth against all entitys
    for (auto entity = entities.begin(); entity != entities.end(); entity++)
    {
-      bool collided = checkCollision(**entity, earth);
+      bool collided = checkCollision(**entity, *earth);
       if (collided)
       {
          (*entity)->kill();
