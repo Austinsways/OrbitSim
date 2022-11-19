@@ -23,7 +23,6 @@ public:
    virtual void advance(const Earth& earth);
    virtual void kill() { dead = true; }
    virtual bool isDead() const { return dead; }
-   virtual bool entityDead(shared_ptr<Entity> entity) { return entity->isDead(); }
    virtual std::list<std::shared_ptr<Entity>> destroy();
    virtual void draw(ogstream& gout) = 0;
 
