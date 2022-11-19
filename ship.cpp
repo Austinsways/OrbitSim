@@ -2,8 +2,7 @@
 
 void Ship::accelerate(const Earth& earth)
 {
-   //double acc = 30.0 * earth.getTimePerFrame() / 60.0;  - No need to divide by 60
-   double acc = 30.0 * earth.getTimePerFrame();
+   double acc = 30.0 * earth.getTimePerFrame() / 60.0;
    velocity.applyAcceleration(Acceleration(angle, acc));
 }
 

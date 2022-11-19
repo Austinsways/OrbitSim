@@ -19,7 +19,8 @@ public:
    virtual Position getPosition() const { return position; }
    virtual void setVelocity(const Velocity& vel) { velocity = vel; }
    virtual Velocity getVelocity() const { return velocity; }
-   virtual double getRadius() const { return radius; }
+   // Radius is set in pixels, but we will return the value in meters
+   virtual double getRadius() const { return radius * Position::getZoom(); }
    virtual void advance(const Earth& earth);
    virtual void kill() { dead = true; }
    virtual bool isDead() const { return dead; }

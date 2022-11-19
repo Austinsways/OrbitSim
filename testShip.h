@@ -62,7 +62,8 @@ class EarthStubGravityDdx100 : public EarthStubTimePerFrame1
 {
 public:
 	Acceleration calculateGravity(const Entity& entity) const {
-		return AccelerationStubDdx100();
+		//return AccelerationStubDdx100();
+		return Acceleration(M_PI_2, 100.0);
 	}
 };
 
@@ -87,6 +88,17 @@ public:
 	}
 
 private:
+	bool closeEnough(const Position& p1, const Position& p2)
+	{
+		return abs(p1.getMetersX() - p2.getMetersX()) < 0.0001
+			&& abs(p1.getMetersY() - p2.getMetersY()) < 0.0001;
+	}
+	bool closeEnough(const Velocity& v1, const Velocity& v2)
+	{
+		return abs(v1.getDx() - v2.getDx()) < 0.0001
+			&& abs(v1.getDy() - v2.getDy()) < 0.0001;
+	}
+
 	/**************************************************
 	 * ADVANCE - No velocity or gravity
 	 **************************************************/
@@ -139,7 +151,8 @@ private:
 		ship.advance(EarthStubGravityDdx100());
 
 		// verify
-		assert(ship.position == Position(0.0, 50.0));
+		assert(closeEnough(ship.position, Position(50.0, 0.0)));
+		//assert(ship.position == Position(50.0, 0.0));
 		assert(ship.velocity == Velocity(0.0, 0.0));
 
 	}  // teardown
@@ -152,14 +165,14 @@ private:
 		// setup
 		Ship ship;
 		ship.position = Position(0.0, 0.0);
-		ship.velocity = Velocity(0.0, 25.0);
+		ship.velocity = Velocity(25.0, 0.0);
 
 		// exercise
 		ship.advance(EarthStubGravityDdx100());
 
 		// verify
-		assert(ship.position == Position(0.0, 75.0));
-		assert(ship.velocity == Velocity(0.0, 25.0));
+		assert(closeEnough(ship.position, Position(75.0, 0.0)));
+		assert(ship.velocity == Velocity(25.0, 0.0));
 
 	}  // teardown
 
@@ -221,9 +234,7 @@ private:
 
 		// verify
 		assert(ship.position == Position(0.0, 0.0));
-		//assert(ship.velocity == Velocity(0.0, 130.0));  - accuracy issue
-		assert(int(10000000 * ship.velocity.getDx()) == int(10000000 * 0.0));
-		assert(int(10000000 * ship.velocity.getDy()) == int(10000000 * 130.0));
+		assert(ship.velocity == Velocity(0.0, 100.5));
 
 	}  // teardown
 
@@ -243,9 +254,7 @@ private:
 
 		// verify
 		assert(ship.position == Position(0.0, 0.0));
-		//assert(ship.velocity == Velocity(-70.0, 0.0));  - accuracy issue
-		assert(int(10000000 * ship.velocity.getDx()) == int(10000000 * -70.0));
-		assert(int(10000000 * ship.velocity.getDy()) == int(10000000 * 0.0));
+		assert(closeEnough(ship.velocity, Velocity(-99.5, 0.0)));
 
 	}  // teardown
 
@@ -265,11 +274,9 @@ private:
 
 		// verify
 		//
-		double xyComponent = 30.0 / M_SQRT2;
+		double xyComponent = 0.5 / M_SQRT2;
 		assert(ship.position == Position(0.0, 0.0));
-		// assert(ship.velocity == Velocity(xyComponent, xyComponent));  - accuracy issue
-		assert(int(10000000 * ship.velocity.getDx()) == int(10000000 * xyComponent));
-		assert(int(10000000 * ship.velocity.getDy()) == int(10000000 * xyComponent));
+		assert(closeEnough(ship.velocity, Velocity(xyComponent, xyComponent)));
 
 	}  // teardown
 };
