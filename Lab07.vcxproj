@@ -156,6 +156,10 @@
     <ClInclude Include="entity.h" />
     <ClInclude Include="fragment.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="gps.h" />
+    <ClInclude Include="gpsCenter.h" />
+    <ClInclude Include="gpsLeft.h" />
+    <ClInclude Include="gpsRight.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="projectile.h" />
     <ClInclude Include="satellite.h" />

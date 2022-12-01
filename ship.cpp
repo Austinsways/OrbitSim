@@ -16,5 +16,5 @@ void Ship::accelerate(const Earth& earth)
 
 Projectile Ship::fire()
 {
-    return Projectile();
+    return Projectile(position, velocity, angle);
 }

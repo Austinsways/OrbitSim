@@ -5,9 +5,15 @@
  * Lehi Lopez
  **************************************************/
 
+#define _USE_MATH_DEFINES
+#include <cmath>
+#include <vector>
+#include <array>
+
 #include "entity.h"
 #include "earth.h"
 #include "acceleration.h"
+#include "projectile.h"
 
 using namespace std;
 
@@ -24,6 +30,8 @@ void Entity::advance(const Earth& earth)
       0.5 * gravity.getDdy() * t * t;
    position.setMetersX(x);
    position.setMetersY(y);
+
+   angle += angularVelocity;
 }
 
 list<shared_ptr<Entity>> Entity::destroy()

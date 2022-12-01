@@ -11,9 +11,12 @@
 #include "game.h"
 #include "ship.h"
 #include "entity.h"
+#include "projectile.h"
+#include "gps.h"
 #include "uiDraw.h"
 
 #include <memory>
+#include <list>
 
 using namespace std;
 
@@ -34,7 +37,9 @@ void Game::draw() const
 
 void Game::init()
 {
+   // Earth
    earth = make_unique<Earth>();
+   // Ship
    Position pos;
    pos.setPixelsX(-450.0);
    pos.setPixelsY(450.0);
@@ -42,6 +47,21 @@ void Game::init()
    shared_ptr<Entity> ship = make_shared<Ship>(Ship(pos, vel, M_PI));
    entities.push_back(ship);
    this->ship = ship;
+   // Sputnik
+
+   // GPS
+   entities.push_back(make_shared<GPS>(GPS(Position(0.0, 26560000.0), Velocity(-3880.0, 0.0))));
+   entities.push_back(make_shared<GPS>(GPS(Position(0.0, -26560000.0), Velocity(3880.0, 0.0))));
+   entities.push_back(make_shared<GPS>(GPS(Position(23001634.72, 13280000.0), Velocity(-1940.0, 3360.18))));
+   entities.push_back(make_shared<GPS>(GPS(Position(23001634.72, -13280000.0), Velocity(1940.0, 3360.18))));
+   entities.push_back(make_shared<GPS>(GPS(Position(-23001634.72, -13280000.0), Velocity(1940.0, -3360.18))));
+   entities.push_back(make_shared<GPS>(GPS(Position(-23001634.72, 13280000.0), Velocity(-1940.0, -3360.18))));
+   // Hubble
+
+   // Dragon
+
+   // Starlink
+
 }
 
 void Game::controlShip(const Interface* pUI)
@@ -58,6 +78,9 @@ void Game::controlShip(const Interface* pUI)
 
    if (pUI->isRight())
       ship->turnRight();
+
+   if (pUI->isSpace() && !ship->isDead())
+      entities.push_back(make_shared<Projectile>(ship->fire()));
 }
 
 void Game::moveEntities()
@@ -72,33 +95,32 @@ bool entityDead(shared_ptr<Entity> entity) { return entity->isDead(); }
 
 void Game::handleCollisions()
 {
-   //we have to check all entitys against eachother. 
+   // To avoid checking collisions infinitely (i.e. something gets destroyed, but a new entity is
+   // created on top of another one and the collisions go on forever) we will store any new entities
+   // created in this round of collisions in a separate list and add them to our main list at the end.
+   list<shared_ptr<Entity>> newEntities;
+
+   // Entity v Entity
    for (auto entityOne = entities.begin(); entityOne != entities.end(); entityOne++)
-   {
-      //double for loops are required for this design
       for (auto entityTwo = entities.begin(); entityTwo != entities.end(); entityTwo++)
-      {
-         //add logic to destroy entitys and create fragments
-         if (entityOne != entityTwo && checkCollision(**entityOne, **entityTwo))
+         if (entityOne != entityTwo
+            && checkCollision(**entityOne, **entityTwo)
+            && !(*entityOne)->isDead()
+            && !(*entityTwo)->isDead()
+            )
          {
-            list<shared_ptr<Entity>> fragments = (*entityOne)->destroy(); //get the object from its shared pointer then call the destroy function
-            for (auto& fragment : fragments)
-            {
-               entities.push_back(fragment); //append all the newly created fragments
-            }
+            // Destroy the two entities and move the created entities into our list
+            newEntities.splice(newEntities.end(), (*entityOne)->destroy());
+            newEntities.splice(newEntities.end(), (*entityTwo)->destroy());
+            // Mark the entities as dead so they can't keep colliding and we can clean them up later
             (*entityOne)->kill();
-            //entityOne has been destroyed and erased from the list, now its time for entityTwo
-            fragments = (*entityTwo)->destroy(); //get the object from its shared pointer then call the destroy function
-            for (auto& fragment : fragments)
-            {
-               entities.push_back(fragment); //append all the newly created fragments
-            }
             (*entityTwo)->kill();
          }
-      }
-   }
 
-   //we need to check earth against all entitys
+   // Merge our new entities into our existing list
+   entities.splice(entities.end(), newEntities);
+
+   // Entity v Earth
    for (auto entity = entities.begin(); entity != entities.end(); entity++)
    {
       bool collided = checkCollision(**entity, *earth);

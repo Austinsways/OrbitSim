@@ -13,11 +13,14 @@
 class Fragment : public ShortLived
 {
 public:
-   Fragment() {}
-   Fragment(const Position& position, const Velocity& velocity) {}
-   Fragment(const Position& position, const Velocity& velocity, float launchAngle) {}
-   void draw(ogstream& gout) {}
+   Fragment() { init(); }
+   Fragment(const Position& position, const Velocity& velocity, double angle) : ShortLived(position, velocity, angle, random(5000.0, 9000.0)) { init(); }
+   void draw(ogstream& gout) { drawFragment(position, angle); }
 
 private:
-   void init() { life = (int)random(50.0, 100.0); }
+   void init() { 
+      radius = 2.0;
+      life = (int)random(50.0, 100.0);
+      angularVelocity = random(-0.1, 0.1);
+   }
 };

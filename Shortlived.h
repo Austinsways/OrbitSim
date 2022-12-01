@@ -16,15 +16,22 @@ using namespace std;
 class ShortLived : public Entity
 {
 public:
-	ShortLived() : life(0), launchOffset(4.0) {}
-	ShortLived(const Position& position, const Velocity& velocity) :
-		life(0), launchOffset(4.0) {}
-	ShortLived(const Position& position, const Velocity& velocity, double launchAngle) :
-		life(0), launchOffset(4.0) {}
-	virtual void advance(const Earth& earth) {}
-	virtual void draw(ogstream& gout) = 0;
+   ShortLived() : Entity(), life(0) {}
+   ShortLived(const Position& position, const Velocity& velocity, double angle = 0.0, double launchSpeed = 0.0, double launchOffset = 0.0) :
+      Entity(position, velocity, angle, launchSpeed, launchOffset),
+      life(0)
+   {
+   }
+   virtual void advance(const Earth& earth) {
+      // Call the parent advance function
+      Entity::advance(earth);
+      // Tick down the life counter
+      life--;
+      if (life <= 0)
+         dead = true;
+   }
+   virtual void draw(ogstream& gout) = 0;
 
 protected:
-	int life;
-	double launchOffset;
+   int life;
 };
