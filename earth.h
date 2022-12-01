@@ -9,7 +9,7 @@
 
 #include "position.h"
 #include "acceleration.h"
-//#include "entity.h"
+ //#include "entity.h"
 #include "uiDraw.h"
 #include "uiInteract.h"
 
@@ -18,7 +18,8 @@ class Entity;
 class Earth
 {
 public:
-   Earth() : radius(6378000.0), angle(0.0) {
+   Earth() : radius(6378000.0), angle(0.0)
+   {
       timePerFrame = 24.0 * 60.0 * Interface().frameRate();
    }
    virtual Acceleration calculateGravity(const Entity& entity) const;

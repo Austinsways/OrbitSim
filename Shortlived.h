@@ -22,7 +22,8 @@ public:
       life(0)
    {
    }
-   virtual void advance(const Earth& earth) {
+   virtual void advance(const Earth& earth)
+   {
       // Call the parent advance function
       Entity::advance(earth);
       // Tick down the life counter

@@ -12,8 +12,8 @@
 class Velocity
 {
 public:
-	Velocity() : dx(0.0), dy(0.0) {}
-	Velocity(double dx, double dy) : dx(dx), dy(dy) {}
+   Velocity() : dx(0.0), dy(0.0) {}
+   Velocity(double dx, double dy) : dx(dx), dy(dy) {}
    double getDx() const { return dx; }
    double getDy() const { return dy; }
    void adjustDx(double dx) { this->dx += dx; }

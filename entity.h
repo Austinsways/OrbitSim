@@ -58,7 +58,7 @@ public:
    virtual bool isDead() const { return dead; }
    virtual std::list<std::shared_ptr<Entity>> destroy();
    virtual void draw(ogstream& gout) = 0;
-   template<typename...Entities>
+   template<typename ...Entities>
    inline std::list<std::shared_ptr<Entity>> createDestroyedList();
 
 protected:
@@ -87,7 +87,7 @@ private:
  * Calling the function like this would create 3 GPS parts and 2 Fragments, going clockwise:
  * createDestroyedList<GPSLeft, GPSCenter, Fragment, GPSRight, Fragment>();
  **************************************************/
-template<typename...Entities>
+template<typename ...Entities>
 inline std::list<std::shared_ptr<Entity>> Entity::createDestroyedList()
 {
    // Create a list of entities
@@ -106,7 +106,7 @@ inline std::list<std::shared_ptr<Entity>> Entity::createDestroyedList()
 
 /**************************************************
  * ENTITY :: ADD NEXT
- * 
+ *
  * WARNING! Recursive type unpacking wizardry ahead...
  *
  * Take the first Entity type and add it to the list.

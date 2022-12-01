@@ -18,7 +18,8 @@ public:
    void draw(ogstream& gout) { drawFragment(position, angle); }
 
 private:
-   void init() { 
+   void init()
+   {
       radius = 2.0;
       life = (int)random(50.0, 100.0);
       angularVelocity = random(-0.1, 0.1);
