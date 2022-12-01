@@ -20,6 +20,9 @@
 
 using namespace std;
 
+/**************************************************
+ * GAME :: ADVANCE
+ **************************************************/
 void Game::advance(const Interface* pUI)
 {
    controlShip(pUI);
@@ -27,6 +30,9 @@ void Game::advance(const Interface* pUI)
    handleCollisions();
 }
 
+/**************************************************
+ * GAME :: DRAW
+ **************************************************/
 void Game::draw() const
 {
    ogstream gout(ptUpperRight);
@@ -35,6 +41,20 @@ void Game::draw() const
       entity->draw(gout);
 }
 
+/**************************************************
+ * GAME :: ADD ENTITY
+ * Helper function for adding an Entity to the simulation
+ **************************************************/
+template<class T>
+void Game::addEntity(const Position& pos, const Velocity& vel, double angle)
+{
+   entities.push_back(make_shared<T>(T(pos, vel, angle)));
+}
+
+/**************************************************
+ * GAME :: INIT
+ * Set up the game
+ **************************************************/
 void Game::init()
 {
    // Earth
@@ -50,12 +70,12 @@ void Game::init()
    // Sputnik
 
    // GPS
-   entities.push_back(make_shared<GPS>(GPS(Position(0.0, 26560000.0), Velocity(-3880.0, 0.0))));
-   entities.push_back(make_shared<GPS>(GPS(Position(0.0, -26560000.0), Velocity(3880.0, 0.0))));
-   entities.push_back(make_shared<GPS>(GPS(Position(23001634.72, 13280000.0), Velocity(-1940.0, 3360.18))));
-   entities.push_back(make_shared<GPS>(GPS(Position(23001634.72, -13280000.0), Velocity(1940.0, 3360.18))));
-   entities.push_back(make_shared<GPS>(GPS(Position(-23001634.72, -13280000.0), Velocity(1940.0, -3360.18))));
-   entities.push_back(make_shared<GPS>(GPS(Position(-23001634.72, 13280000.0), Velocity(-1940.0, -3360.18))));
+   addEntity<GPS>(Position(0.0, 26560000.0), Velocity(-3880.0, 0.0));
+   addEntity<GPS>(Position(0.0, -26560000.0), Velocity(3880.0, 0.0));
+   addEntity<GPS>(Position(23001634.72, 13280000.0), Velocity(-1940.0, 3360.18));
+   addEntity<GPS>(Position(23001634.72, -13280000.0), Velocity(1940.0, 3360.18));
+   addEntity<GPS>(Position(-23001634.72, -13280000.0), Velocity(1940.0, -3360.18));
+   addEntity<GPS>(Position(-23001634.72, 13280000.0), Velocity(-1940.0, -3360.18));
    // Hubble
 
    // Dragon
@@ -64,6 +84,10 @@ void Game::init()
 
 }
 
+/**************************************************
+ * GAME :: CONTROL SHIP
+ * Handle the Ship's movement
+ **************************************************/
 void Game::controlShip(const Interface* pUI)
 {
    auto ship = dynamic_pointer_cast<Ship, Entity>(this->ship);
@@ -83,6 +107,9 @@ void Game::controlShip(const Interface* pUI)
       entities.push_back(make_shared<Projectile>(ship->fire()));
 }
 
+/**************************************************
+ * GAME :: MOVE ENTITIES
+ **************************************************/
 void Game::moveEntities()
 {
    earth->advance();
@@ -90,9 +117,16 @@ void Game::moveEntities()
       entity->advance(*earth);
 }
 
-// Predicate used for filtering out dead entities
+/**************************************************
+ * ENTITY DEAD
+ * Predicate used for filtering out dead entities
+ **************************************************/
 bool entityDead(shared_ptr<Entity> entity) { return entity->isDead(); }
 
+/**************************************************
+ * GAME :: HANDLE COLLISIONS
+ * Handle all the collisions in the game and add any new Entities that result from collisions
+ **************************************************/
 void Game::handleCollisions()
 {
    // To avoid checking collisions infinitely (i.e. something gets destroyed, but a new entity is
@@ -134,6 +168,10 @@ void Game::handleCollisions()
    entities.remove_if(entityDead);
 }
 
+/**************************************************
+ * GAME :: CHECK COLLISION
+ * Check for a collision between two Entities or an Entity and the Earth
+ **************************************************/
 bool Game::checkCollision(const Entity& eOne, const Entity& eTwo) const
 {
    double combinedRadii = eOne.getRadius() + eTwo.getRadius();

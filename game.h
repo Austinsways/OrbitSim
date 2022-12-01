@@ -41,6 +41,8 @@ private:
 	void handleCollisions();
 	bool checkCollision(const Entity& eOne, const Entity& eTwo) const;
 	bool checkCollision(const Entity& entity, const Earth& earth) const;
+	template<class T>
+	void addEntity(const Position& pos, const Velocity& vel, double angle = 0.0);
 
 	Position ptUpperRight;
 };
