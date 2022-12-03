@@ -13,6 +13,7 @@
 #include "entity.h"
 #include "projectile.h"
 #include "gps.h"
+#include "sputnik.h"
 #include "uiDraw.h"
 
 #include <memory>
@@ -68,6 +69,7 @@ void Game::init()
    entities.push_back(ship);
    this->ship = ship;
    // Sputnik
+   addEntity<Sputnik>(Position(-36515095.13, 21082000), Velocity(2051, 2684.68));
 
    // GPS
    addEntity<GPS>(Position(0.0, 26560000.0), Velocity(-3880.0, 0.0));

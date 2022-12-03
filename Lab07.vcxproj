@@ -165,6 +165,7 @@
     <ClInclude Include="satellite.h" />
     <ClInclude Include="ship.h" />
     <ClInclude Include="shortLived.h" />
+    <ClInclude Include="sputnik.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="testGame.h" />
     <ClInclude Include="testShip.h" />
