@@ -113,6 +113,21 @@
     <ClInclude Include="sputnik.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="hubble.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hubbleTelescope.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hubbleComputer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hubbleRight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hubbleLeft.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

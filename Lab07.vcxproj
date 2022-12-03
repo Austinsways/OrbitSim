@@ -160,6 +160,11 @@
     <ClInclude Include="gpsCenter.h" />
     <ClInclude Include="gpsLeft.h" />
     <ClInclude Include="gpsRight.h" />
+    <ClInclude Include="hubble.h" />
+    <ClInclude Include="hubbleComputer.h" />
+    <ClInclude Include="hubbleLeft.h" />
+    <ClInclude Include="hubbleRight.h" />
+    <ClInclude Include="hubbleTelescope.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="projectile.h" />
     <ClInclude Include="satellite.h" />
