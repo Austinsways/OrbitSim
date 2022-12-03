@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Hubble">
+      <UniqueIdentifier>{ea8c5e06-8e2d-4706-ab1f-1c2595a7a7f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GPS">
+      <UniqueIdentifier>{c779e73e-46b4-4207-9c81-bc88d8c19697}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Sputnik">
+      <UniqueIdentifier>{58c7ed80-4517-4e66-b5c1-fe523d8b1ac4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Dragon">
+      <UniqueIdentifier>{1d1ad5fb-4666-41c3-b8b9-643ff3d22b5e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="orbit.cpp">
@@ -98,35 +110,47 @@
     <ClInclude Include="fragment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gps.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gpsLeft.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gpsCenter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gpsRight.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sputnik.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="hubble.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="hubbleTelescope.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Hubble</Filter>
     </ClInclude>
     <ClInclude Include="hubbleComputer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Hubble</Filter>
     </ClInclude>
     <ClInclude Include="hubbleRight.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Hubble</Filter>
     </ClInclude>
     <ClInclude Include="hubbleLeft.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Hubble</Filter>
+    </ClInclude>
+    <ClInclude Include="hubbleTelescope.h">
+      <Filter>Header Files\Hubble</Filter>
+    </ClInclude>
+    <ClInclude Include="gps.h">
+      <Filter>Header Files\GPS</Filter>
+    </ClInclude>
+    <ClInclude Include="gpsCenter.h">
+      <Filter>Header Files\GPS</Filter>
+    </ClInclude>
+    <ClInclude Include="gpsLeft.h">
+      <Filter>Header Files\GPS</Filter>
+    </ClInclude>
+    <ClInclude Include="gpsRight.h">
+      <Filter>Header Files\GPS</Filter>
+    </ClInclude>
+    <ClInclude Include="sputnik.h">
+      <Filter>Header Files\Sputnik</Filter>
+    </ClInclude>
+    <ClInclude Include="dragon.h">
+      <Filter>Header Files\Dragon</Filter>
+    </ClInclude>
+    <ClInclude Include="crewDragonCenter.h">
+      <Filter>Header Files\Dragon</Filter>
+    </ClInclude>
+    <ClInclude Include="crewDragonLeft.h">
+      <Filter>Header Files\Dragon</Filter>
+    </ClInclude>
+    <ClInclude Include="crewDragonRight.h">
+      <Filter>Header Files\Dragon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

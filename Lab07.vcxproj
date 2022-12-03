@@ -152,6 +152,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acceleration.h" />
+    <ClInclude Include="crewDragonCenter.h" />
+    <ClInclude Include="crewDragonLeft.h" />
+    <ClInclude Include="crewDragonRight.h" />
+    <ClInclude Include="dragon.h" />
     <ClInclude Include="earth.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="fragment.h" />
