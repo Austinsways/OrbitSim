@@ -175,6 +175,9 @@
     <ClInclude Include="ship.h" />
     <ClInclude Include="shortLived.h" />
     <ClInclude Include="sputnik.h" />
+    <ClInclude Include="starlink.h" />
+    <ClInclude Include="starlinkArray.h" />
+    <ClInclude Include="starlinkBody.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="testGame.h" />
     <ClInclude Include="testShip.h" />

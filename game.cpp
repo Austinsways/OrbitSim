@@ -16,6 +16,7 @@
 #include "sputnik.h"
 #include "hubble.h"
 #include "dragon.h"
+#include "starlink.h"
 #include "uiDraw.h"
 
 #include <memory>
@@ -85,7 +86,7 @@ void Game::init()
    // Dragon
    addEntity<CrewDragon>(Position(0.0, 8000000.0), Velocity(-7900.0, 0.0));
    // Starlink
-
+   addEntity<Starlink>(Position(0.0, -13020000.0), Velocity(5800.0, 0.0));
 }
 
 /**************************************************

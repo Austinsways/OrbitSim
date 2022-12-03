@@ -25,6 +25,9 @@
     <Filter Include="Header Files\Dragon">
       <UniqueIdentifier>{1d1ad5fb-4666-41c3-b8b9-643ff3d22b5e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Starlink">
+      <UniqueIdentifier>{5d115760-a9a1-469c-8734-8583341c7a63}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="orbit.cpp">
@@ -151,6 +154,15 @@
     </ClInclude>
     <ClInclude Include="crewDragonRight.h">
       <Filter>Header Files\Dragon</Filter>
+    </ClInclude>
+    <ClInclude Include="starlink.h">
+      <Filter>Header Files\Starlink</Filter>
+    </ClInclude>
+    <ClInclude Include="starlinkBody.h">
+      <Filter>Header Files\Starlink</Filter>
+    </ClInclude>
+    <ClInclude Include="starlinkArray.h">
+      <Filter>Header Files\Starlink</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
