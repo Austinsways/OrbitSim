@@ -145,6 +145,7 @@
     <ClCompile Include="orbit.cpp" />
     <ClCompile Include="position.cpp" />
     <ClCompile Include="ship.cpp" />
+    <ClCompile Include="star.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="uiDraw.cpp" />
     <ClCompile Include="uiInteract.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="ship.h" />
     <ClInclude Include="shortLived.h" />
     <ClInclude Include="sputnik.h" />
+    <ClInclude Include="star.h" />
     <ClInclude Include="starlink.h" />
     <ClInclude Include="starlinkArray.h" />
     <ClInclude Include="starlinkBody.h" />

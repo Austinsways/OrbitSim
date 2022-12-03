@@ -11,6 +11,7 @@
 #include "entity.h"
 #include "earth.h"
 #include "ship.h"
+#include "star.h"
 #include "uiDraw.h"
 #include "uiInteract.h"
 
@@ -35,6 +36,7 @@ private:
    // The Ship will live inside the list of entities, but we will keep a pointer to it for convenience.
    std::shared_ptr<Entity> ship;
    std::list<std::shared_ptr<Entity>> entities;
+   Star stars[250];
    void init();
    void controlShip(const Interface* pUI);
    void moveEntities();

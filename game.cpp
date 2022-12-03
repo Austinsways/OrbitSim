@@ -19,6 +19,7 @@
 #include "starlink.h"
 #include "uiDraw.h"
 
+#include <time.h>
 #include <memory>
 #include <list>
 
@@ -43,6 +44,9 @@ void Game::draw() const
    earth->draw(gout);
    for (auto& entity : entities)
       entity->draw(gout);
+   for (auto star : stars) {
+       star.draw(gout);
+   }
 }
 
 /**************************************************
@@ -87,6 +91,13 @@ void Game::init()
    addEntity<CrewDragon>(Position(0.0, 8000000.0), Velocity(-7900.0, 0.0));
    // Starlink
    addEntity<Starlink>(Position(0.0, -13020000.0), Velocity(5800.0, 0.0));
+
+
+   //randomizing the seed for random numbers using the pc's current time
+   srand(time(NULL));
+   
+
+   
 }
 
 /**************************************************
@@ -120,6 +131,10 @@ void Game::moveEntities()
    earth->advance();
    for (auto& entity : entities)
       entity->advance(*earth);
+
+   for (auto &star : stars) {
+       star.incrementPhase();
+   }
 }
 
 /**************************************************
