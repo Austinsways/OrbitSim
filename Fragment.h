@@ -10,6 +10,10 @@
 #include "shortLived.h"
 #include "uiDraw.h"
 
+ /**************************************************
+  * FRAGMENT
+  * A piece broken off from a Satellite that dies after a short amount of time
+  **************************************************/
 class Fragment : public ShortLived
 {
 public:

@@ -16,6 +16,10 @@
 const double GRAVITY_SEA_LEVEL = 9.80665;
 const double EARTH_RADIUS = 6378000.0;
 
+/**************************************************
+ * EARTH :: CALCULATE GRAVITY
+ * Calculate the Acceleration due to gravity for an Entity
+ **************************************************/
 Acceleration Earth::calculateGravity(const Entity& entity) const
 {
    Position entityPos = entity.getPosition();
@@ -31,9 +35,4 @@ Acceleration Earth::calculateGravity(const Entity& entity) const
    );
 
    return Acceleration(gravityDirection, gravityMagnitude);
-}
-
-void Earth::advance()
-{
-   angle -= 2.0 * M_PI / timePerFrame / 60.0;
 }

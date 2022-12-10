@@ -19,6 +19,10 @@
 #include <list>
 #include <memory>
 
+/**************************************************
+ * CREW DRAGON
+ * The Crew Dragon Satellite
+ **************************************************/
 class CrewDragon : public Satellite
 {
 public:

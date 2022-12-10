@@ -110,7 +110,7 @@ public:
 };
 
 /**************************************************
- * TEST Game
+ * TEST GAME
  * Unit tests for the Game class
  **************************************************/
 class TestGame

@@ -9,6 +9,10 @@
 
 #include <cmath>
 
+/**************************************************
+ * ACCELERATION
+ * Measured in meters/second^2
+ **************************************************/
 class Acceleration
 {
 public:

@@ -20,6 +20,10 @@
 #include <list>
 #include <memory>
 
+/**************************************************
+ * HUBBLE
+ * The Hubble telescope
+ **************************************************/
 class Hubble : public Satellite
 {
 public:

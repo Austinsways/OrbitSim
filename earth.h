@@ -7,14 +7,19 @@
 
 #pragma once
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+
 #include "position.h"
 #include "acceleration.h"
- //#include "entity.h"
 #include "uiDraw.h"
 #include "uiInteract.h"
 
 class Entity;
 
+/**************************************************
+ * EARTH
+ **************************************************/
 class Earth
 {
 public:
@@ -26,7 +31,10 @@ public:
    virtual Position getPosition() const { return position; }
    virtual double getRadius() const { return radius; }
    virtual double getTimePerFrame() const { return timePerFrame; }
-   virtual void advance();
+   virtual void advance()
+   {
+      angle -= 2.0 * M_PI / timePerFrame / 60.0;
+   }
    virtual void draw(ogstream& gout) const { drawEarth(position, angle); }
 
 private:

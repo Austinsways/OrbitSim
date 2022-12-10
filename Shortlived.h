@@ -13,6 +13,10 @@
 
 using namespace std;
 
+/**************************************************
+ * SHORT LIVED
+ * A base class for Entities that die after a specified amount of time, like Projectiles and Fragments
+ **************************************************/
 class ShortLived : public Entity
 {
 public:

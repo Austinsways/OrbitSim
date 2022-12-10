@@ -9,20 +9,23 @@
 
 #include "position.h"
 #include "uiDraw.h"
-#include <random>
 
-
-
-
-class Star 
+/**************************************************
+ * STAR
+ **************************************************/
+class Star
 {
 public:
-	Star();
-	void draw(ogstream& gout) { drawStar(pos, phase); }
-	void incrementPhase();
+   Star(const Position& ptUpperRight) : phase((int)random(0, 255))
+   {
+      double x = ptUpperRight.getMetersX() / 2.0;
+      double y = ptUpperRight.getMetersY() / 2.0;
+      position = Position(random(-x, x), random(-y, y));
+   }
+   void draw(ogstream& gout) { drawStar(position, phase); }
+   void incrementPhase() { phase++; }
 
 private:
-	Position pos;
-	unsigned char phase;
-	bool phasePositive = true;
+   Position position;
+   unsigned char phase;
 };

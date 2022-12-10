@@ -19,6 +19,10 @@
 #include <list>
 #include <memory>
 
+/**************************************************
+ * GPS
+ * A GPS Satellite
+ **************************************************/
 class GPS : public Satellite
 {
 public:

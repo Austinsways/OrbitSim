@@ -9,6 +9,10 @@
 
 #include "acceleration.h"
 
+/**************************************************
+ * VELOCITY
+ * Measuring meters/second
+ **************************************************/
 class Velocity
 {
 public:

@@ -16,6 +16,10 @@
 #include <list>
 #include <memory>
 
+/**************************************************
+ * SPUTNIK
+ * The Sputnik Satellite
+ **************************************************/
 class Sputnik : public Satellite
 {
 public:

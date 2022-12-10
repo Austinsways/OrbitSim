@@ -56,7 +56,7 @@ int main(int argc, char** argv)
    ptUpperRight.setPixelsX(1000.0);
    ptUpperRight.setPixelsY(1000.0);
    Interface ui(0, NULL,
-      "Prototype",   /* name on the window */
+      "Orbit Simulator",   /* name on the window */
       ptUpperRight);
 
    Game game(ptUpperRight);

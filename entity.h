@@ -12,7 +12,6 @@
 
 #include "position.h"
 #include "velocity.h"
- //#include "earth.h"
 #include "uiDraw.h"
 
 #include <list>
@@ -21,6 +20,10 @@
 
 class Earth;
 
+/**************************************************
+ * ENTITY
+ * Base class for all objects that respond to physics and orbit the Earth
+ **************************************************/
 class Entity
 {
 public:
@@ -56,7 +59,10 @@ public:
    virtual void advance(const Earth& earth);
    virtual void kill() { dead = true; }
    virtual bool isDead() const { return dead; }
-   virtual std::list<std::shared_ptr<Entity>> destroy();
+   virtual std::list<std::shared_ptr<Entity>> destroy()
+   {
+      return std::list<std::shared_ptr<Entity>>();
+   }
    virtual void draw(ogstream& gout) = 0;
    template<typename ...Entities>
    inline std::list<std::shared_ptr<Entity>> createDestroyedList();

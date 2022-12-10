@@ -77,7 +77,7 @@ void Game::init()
    entities.push_back(ship);
    this->ship = ship;
    // Sputnik
-   addEntity<Sputnik>(Position(-36515095.13, 21082000), Velocity(2051, 2684.68));
+   addEntity<Sputnik>(Position(-36515095.13, 21082000.0), Velocity(2051.0, 2684.68));
    // GPS
    addEntity<GPS>(Position(0.0, 26560000.0), Velocity(-3880.0, 0.0));
    addEntity<GPS>(Position(0.0, -26560000.0), Velocity(3880.0, 0.0));
@@ -91,8 +91,10 @@ void Game::init()
    addEntity<CrewDragon>(Position(0.0, 8000000.0), Velocity(-7900.0, 0.0));
    // Starlink
    addEntity<Starlink>(Position(0.0, -13020000.0), Velocity(5800.0, 0.0));
-   //randomizing the seed for random numbers using the pc's current time
-   srand(time(NULL));
+
+   // Stars
+   for (int i = 0; i < 250; i++)
+      stars.push_back(Star(ptUpperRight));
 }
 
 /**************************************************

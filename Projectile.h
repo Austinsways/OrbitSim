@@ -12,6 +12,10 @@
 
 #include <cmath>
 
+/**************************************************
+ * PROJECTILE
+ * A bullet shot from the Ship that dies after a short amount of time
+ **************************************************/
 class Projectile : public ShortLived
 {
 public:

@@ -18,6 +18,10 @@
 #include <list>
 #include <memory>
 
+/**************************************************
+ * STARLINK
+ * A Starlink Satellite
+ **************************************************/
 class Starlink : public Satellite
 {
 public:
